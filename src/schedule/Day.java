@@ -17,6 +17,10 @@ public class Day {
 		return this.events.remove(block);
 	}
 	
+	public List<NFLEvent> getEvents() {
+		return this.events;
+	}
+	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for(NFLEvent e : events) {
