@@ -15,6 +15,16 @@ public class Week {
 		}
 	}
 	
+	public Day getDay(int day) {
+		return days.get(day);
+	}
 	
-	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("--- Week ---\n");
+		for(Day d : days) {
+			sb.append(d.toString());
+		}
+		return sb.toString();
+	}
 }
