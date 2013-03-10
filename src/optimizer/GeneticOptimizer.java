@@ -54,7 +54,11 @@ public class GeneticOptimizer<T extends Evolvable<T>> {
 				System.exit(1);
 			}
 			population = trim(population);
-			System.out.println("Best of population: " + heuristic.getValue(population.get(0)));
+			Integer best = heuristic.getValue(population.get(0));
+			if(options.getMaxHeuristic() != null && best.equals(options.getMaxHeuristic())) {
+				break;
+			}
+			System.out.println("Best of population: " + best);
 			/*System.out.println(population.size());
 			System.out.println("--- Schedules ---");
 			for(T t : population) {

@@ -58,7 +58,7 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 			value += weekValue;
 		}
 		
-		value += 0 - this.getByeWeekValue(evolvable);
+		//value += 0 - this.getByeWeekValue(evolvable);
 		
 		return value;
 	}
