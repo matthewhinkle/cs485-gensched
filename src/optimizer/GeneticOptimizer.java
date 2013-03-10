@@ -54,13 +54,12 @@ public class GeneticOptimizer<T extends Evolvable<T>> {
 				System.exit(1);
 			}
 			population = trim(population);
-			/*
 			System.out.println("--- Schedules ---");
 			for(T t : population) {
-				System.out.println(t.toString());
+				//System.out.println(t.toString());
+				System.out.println(heuristic.getValue(t));
 			}
 			System.out.println("--- Schedules ---\n\n");
-			*/
 		}
 
 		return (T) population.get(0);
