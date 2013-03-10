@@ -19,7 +19,7 @@ public class Schedule implements Evolvable<Schedule> {
 		this.weeks = weeks;
 	}
 	
-	public List<Week> getDays() {
+	public List<Week> getWeeks() {
 		return this.weeks;
 	}
 	
