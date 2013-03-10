@@ -32,9 +32,39 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 		
 		return value;
 	}
-
+	
 	@Override
-	public Integer getValue(Schedule evolvable) {
+	public Double getValue(Schedule schedule) {
+		Double value = 0.0;
+		value += getOccurencesValue(schedule);
+		value += 0 - this.getByeWeekValue(schedule);
+		value += getSixteenGamesPerWeek(schedule);
+		return value;
+	}
+	
+	public Double getSixteenGamesPerWeek(Schedule schedule) {
+		Double value = 0.0;
+		
+		for(Week w : schedule.getWeeks()) {
+			Double weekValue = 16.0;
+			List<NFLEvent> events = w.getDay(0).getEvents();
+			double byes = 0;
+			double games = 0;
+			for(NFLEvent e : events) {
+				if(e.getAway().equals("BYE") || e.getHome().equals("BYE")) {
+					byes += 1;
+				} else {
+					games += 1;
+				}
+			}
+			byes /= 2.0;
+			value -= weekValue - Math.abs(byes + games);
+		}
+		
+		return value;
+	}
+
+	public Integer getOccurencesValue(Schedule evolvable) {
 		Integer value = 0;
 		for(Week w : evolvable.getWeeks()) {
 			Integer weekValue = 0;
@@ -54,12 +84,9 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 					weekValue += (1 - occurences(team, teams));
 				}
 			}
-			System.out.println("Value for week: " + weekValue);
+			//System.out.println("Value for week: " + weekValue);
 			value += weekValue;
-		}
-		
-		//value += 0 - this.getByeWeekValue(evolvable);
-		
+		}		
 		return value;
 	}
 	

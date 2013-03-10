@@ -20,6 +20,7 @@ public class Main {
 		final EvolvableFactory<Schedule> factory = new EvolvableScheduleFactory(events);
 		final Heuristic<Schedule> heuristic = new ScheduleHeuristic();
 		final GeneticOptimizerOptions options = new GeneticOptimizerOptions();
+		options.setChanceToMutate(0.5);
 		options.setMaxHeuristic(0);
 		options.setIterations(1000);
 		

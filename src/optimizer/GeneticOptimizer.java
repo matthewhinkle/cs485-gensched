@@ -33,6 +33,7 @@ public class GeneticOptimizer<T extends Evolvable<T>> {
 			population.add(factory.createEvolvable());
 		}
 
+		Double gbest = null;
 		/*
 		 * For every iteration:
 		 * 	1) Evolve
@@ -54,11 +55,14 @@ public class GeneticOptimizer<T extends Evolvable<T>> {
 				System.exit(1);
 			}
 			population = trim(population);
-			Integer best = heuristic.getValue(population.get(0));
+			Double best = heuristic.getValue(population.get(0));
 			if(options.getMaxHeuristic() != null && best.equals(options.getMaxHeuristic())) {
 				break;
 			}
-			System.out.println("Best of population: " + best);
+			if(gbest == null || best > gbest) {
+				gbest = best;
+				System.out.println("Best of population: " + best);
+			}
 			/*System.out.println(population.size());
 			System.out.println("--- Schedules ---");
 			for(T t : population) {
