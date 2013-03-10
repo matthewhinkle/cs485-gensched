@@ -3,7 +3,6 @@ package src.schedule;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ScheduleGenerator {
 	
 	public Schedule generate() {
@@ -16,6 +15,8 @@ public class ScheduleGenerator {
 	}
 	
 	public Schedule generate(List<Week> weeks) {
+		
+		
 		return new Schedule(weeks);
 	}
 	
