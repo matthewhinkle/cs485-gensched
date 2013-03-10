@@ -12,25 +12,42 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 		
 		List<Week> weeks = evolvable.getWeeks();
 		for(int i = 0; i < weeks.size(); i++) {
-			if(i >= 4 && i <= 11) {
-				continue;
-			}
-			
 			Week w = weeks.get(i);
-			for(int j = 0; j < Week.DAYS_PER_WEEK; j++) {
-				Day day = w.getDay(j);
+			
+			if(i >= 4 && i <= 11) {
+				int byeCount = 0;
+				for(int j = 0; j < Week.DAYS_PER_WEEK; j++) {
+					Day day = w.getDay(j);
+					
+					List<NFLEvent> events = day.getEvents();
+					for(NFLEvent event : events) {
+						if(this.isByeEvent(event)) {
+							byeCount += 1;
+						}
+					}
+				}
 				
-				List<NFLEvent> events = day.getEvents();
-				for(NFLEvent event : events) {
-					if(event.getHome().equalsIgnoreCase("BYE")
-					|| event.getAway().equalsIgnoreCase("BYE")) {
-						value += 1;
+				/* there should be as close to 4 team bye weeks during weeks 4-11 */
+				value += Math.abs(4 - byeCount);
+			} else {		
+				for(int j = 0; j < Week.DAYS_PER_WEEK; j++) {
+					Day day = w.getDay(j);
+					
+					List<NFLEvent> events = day.getEvents();
+					for(NFLEvent event : events) {
+						if(this.isByeEvent(event)) {
+							value += 1;
+						}
 					}
 				}
 			}
 		}
 		
 		return value;
+	}
+	
+	private boolean isByeEvent(NFLEvent event) {
+		return event.getHome().equalsIgnoreCase("BYE") || event.getAway().equalsIgnoreCase("BYE");
 	}
 
 	@Override
