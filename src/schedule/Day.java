@@ -7,8 +7,19 @@ public class Day {
 	
 	public static final int MINUTES_PER_DAY = 60 * 24;
 	
-	private List<NFLEvent> events = new ArrayList<NFLEvent>();
+	private List<NFLEvent> events;
 	
+	public Day(Day day) {
+		events = new ArrayList<NFLEvent>();
+		for(NFLEvent e : day.getEvents()) {
+			this.addEvent(e);
+		}
+	}
+
+	public Day() {
+		events = new ArrayList<NFLEvent>();
+	}
+
 	public boolean addEvent(NFLEvent e) {
 		return this.events.add(e);
 	}

@@ -15,6 +15,15 @@ public class Week {
 		}
 	}
 	
+	public Week(Week other) {
+		for(int i = 0; i < Week.DAYS_PER_WEEK; i++) {
+			this.days.add(new Day());
+		}
+		for(int i = 0; i < DAYS_PER_WEEK; i++) {
+			days.set(i, new Day(other.getDay(i)));
+		}
+	}
+	
 	public Day getDay(int day) {
 		return days.get(day);
 	}

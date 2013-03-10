@@ -4,6 +4,7 @@ public class GeneticOptimizerOptions {
 	private double chanceToMutate = 0.05;
 	private int populationSize = 20;
 	private int iterations = 20;
+	private Integer maxHeuristic = null;
 
 	/**
 	 * @return the chanceToMutate
@@ -40,5 +41,13 @@ public class GeneticOptimizerOptions {
 	 */
 	public void setIterations(int iterations) {
 		this.iterations = iterations;
+	}
+	
+	public void setMaxHeuristic(int max) {
+		this.maxHeuristic = max;
+	}
+	
+	public Integer getMaxHeuristic() {
+		return this.maxHeuristic;
 	}
 }

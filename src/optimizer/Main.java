@@ -20,12 +20,13 @@ public class Main {
 		final EvolvableFactory<Schedule> factory = new EvolvableScheduleFactory(events);
 		final Heuristic<Schedule> heuristic = new ScheduleHeuristic();
 		final GeneticOptimizerOptions options = new GeneticOptimizerOptions();
+		options.setMaxHeuristic(0);
 		options.setIterations(1000);
 		
 		final GeneticOptimizer<Schedule> optimizer = new GeneticOptimizer<Schedule>(factory, heuristic, options);
 		
 		final Schedule optimizedSchedule = optimizer.optimize();
-		
+		System.out.println(heuristic.getValue(optimizedSchedule));
 		System.out.println(optimizedSchedule.toString());
 	}
 

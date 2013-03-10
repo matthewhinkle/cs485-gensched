@@ -54,12 +54,24 @@ public class GeneticOptimizer<T extends Evolvable<T>> {
 				System.exit(1);
 			}
 			population = trim(population);
+			Integer best = heuristic.getValue(population.get(0));
+			if(options.getMaxHeuristic() != null && best.equals(options.getMaxHeuristic())) {
+				break;
+			}
+			System.out.println("Best of population: " + best);
+			/*System.out.println(population.size());
 			System.out.println("--- Schedules ---");
 			for(T t : population) {
-				//System.out.println(t.toString());
+				System.out.println(t.toString());
+				try {
+					Runtime.getRuntime().exec("clear");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				System.out.println(heuristic.getValue(t));
 			}
 			System.out.println("--- Schedules ---\n\n");
+			*/
 		}
 
 		return (T) population.get(0);
@@ -81,7 +93,11 @@ public class GeneticOptimizer<T extends Evolvable<T>> {
 	 * Trim the population down to the population size
 	 */
 	public List<T> trim(List<T> population) {
-		return population.subList(0, options.getPopulationSize());
+		List<T> l = new ArrayList<T>();
+		for(int i = 0; i < options.getPopulationSize(); i++) {
+			l.add(population.get(i));
+		}
+		return l;
 	}
 
 	/*
@@ -100,7 +116,7 @@ public class GeneticOptimizer<T extends Evolvable<T>> {
 			while(parents.size() < e.getNumberOfMates()) {
 				parents.add((T) population.get(random.nextInt(population.size())));
 			}
-			children.addAll(e.mate(parents));
+			children.addAll(e.mate(new ArrayList<T>(parents)));
 		}
 		
 		population.addAll(children);
