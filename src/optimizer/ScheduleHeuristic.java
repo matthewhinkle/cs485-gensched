@@ -6,7 +6,8 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 
 	@Override
 	public Integer getValue(Schedule evolvable) {
-		return evolvable.h;
+		Integer value = 0;
+		return value;
 	}
 
 }
