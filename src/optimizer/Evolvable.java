@@ -11,7 +11,7 @@ public interface Evolvable<T extends Evolvable<T>> {
 	/*
 	 * Get the children produced from mating
 	 */
-	public List<T> mate(Iterable<T> mates);
+	public List<T> mate(List<T> mates);
 	
 	/*
 	 * Mutate this evolvable

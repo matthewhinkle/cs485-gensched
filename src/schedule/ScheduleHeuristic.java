@@ -22,6 +22,8 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 	public Integer getValue(Schedule evolvable) {
 		Integer value = 0;
 		for(Week w : evolvable.getWeeks()) {
+			Integer weekValue = 0;
+
 			// Everything is on Day 0 for now.
 			Day day = w.getDay(0);
 			List<String> teams = new ArrayList<String>();
@@ -29,12 +31,16 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 				teams.add(e.getAway());
 				teams.add(e.getHome());
 			}
-			
-			for(String team : teams) {
-				if(!team.equals("BYE")) {
-					value += (1 - occurences(team, teams));
+
+			for(int i = 0; i < teams.size(); i++) {
+				String team = teams.get(i);
+				if(!team.equals("BYE") && !teams.subList(0, i).contains(team)) {
+					//System.out.println("Team: " + team + " occurs " + occurences(team, teams) + " times.");
+					weekValue += (1 - occurences(team, teams));
 				}
 			}
+			//System.out.println("Value for week: " + weekValue);
+			value += weekValue;
 		}
 		return value;
 	}

@@ -25,7 +25,7 @@ public class Main {
 		final GeneticOptimizer<Schedule> optimizer = new GeneticOptimizer<Schedule>(factory, heuristic, options);
 		
 		final Schedule optimizedSchedule = optimizer.optimize();
-		
+		System.out.println(heuristic.getValue(optimizedSchedule));
 		System.out.println(optimizedSchedule.toString());
 	}
 

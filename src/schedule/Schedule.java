@@ -14,6 +14,13 @@ public class Schedule implements Evolvable<Schedule> {
 		this.weeks = new ArrayList<Week>();
 	}
 	
+	public Schedule(int numWeeks) {
+		this.weeks = new ArrayList<Week>();
+		for(int i = 0; i < numWeeks; i++) {
+			weeks.add(new Week());
+		}
+	}
+	
 	public Schedule(List<Week> weeks) {
 		this.weeks = weeks;
 	}
@@ -40,11 +47,18 @@ public class Schedule implements Evolvable<Schedule> {
 	}
 
 	@Override
-	public List<Schedule> mate(Iterable<Schedule> mates) {
+	public List<Schedule> mate(List<Schedule> mates) {
 		List<Schedule> schedules = new ArrayList<Schedule>();
 		
-		//schedules.add(new ScheduleGenerator().generate());
-		
+		Random random = new Random();
+		for(int j = 0; j < 10; j++) {
+			Schedule child = new Schedule(this.weeks.size());
+			for(int i = 0; i < weeks.size(); i++) {
+				Schedule parent = random.nextInt(2) == 0 ? this : mates.get(0); 
+				child.getWeeks().set(i, new Week(parent.getWeeks().get(i)));
+			}
+			schedules.add(child);
+		}
 		return schedules;
 	}
 
