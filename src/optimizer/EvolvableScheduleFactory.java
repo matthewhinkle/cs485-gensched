@@ -3,9 +3,10 @@ package src.optimizer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cs485.gensched.Day;
-import com.cs485.gensched.Schedule;
-import com.cs485.gensched.ScheduleGenerator;
+import src.schedule.Day;
+import src.schedule.Schedule;
+import src.schedule.ScheduleGenerator;
+
 
 public class EvolvableScheduleFactory extends EvolvableFactory<Schedule> {
 

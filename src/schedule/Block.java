@@ -1,4 +1,4 @@
-package com.cs485.gensched;
+package src.schedule;
 
 public class Block {
 	

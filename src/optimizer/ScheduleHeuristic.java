@@ -1,6 +1,6 @@
 package src.optimizer;
 
-import com.cs485.gensched.Schedule;
+import src.schedule.Schedule;
 
 public class ScheduleHeuristic implements Heuristic<Schedule> {
 

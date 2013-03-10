@@ -1,6 +1,6 @@
 package src.optimizer;
 
-import com.cs485.gensched.Schedule;
+import src.schedule.Schedule;
 
 public class Main {
 
@@ -9,7 +9,7 @@ public class Main {
 		final Heuristic<Schedule> heuristic = new ScheduleHeuristic();
 		final GeneticOptimizerOptions options = new GeneticOptimizerOptions();
 		
-		final GeneticOptimizer<Schedule> optimizer = new GeneticOptimizer<>(factory, heuristic, options);
+		final GeneticOptimizer<Schedule> optimizer = new GeneticOptimizer<Schedule>(factory, heuristic, options);
 		
 		final Schedule optimizedSchedule = optimizer.optimize();
 		
