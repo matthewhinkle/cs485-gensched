@@ -9,18 +9,18 @@ import src.optimizer.Evolvable;
 
 public class Schedule implements Evolvable<Schedule> {
 	public int h = (new Random()).nextInt();
-	private List<Day> days;
+	private List<Week> weeks;
 	
 	public Schedule() {
-		this.days = new ArrayList<Day>();
+		this.weeks = new ArrayList<Week>();
 	}
 	
-	public Schedule(List<Day> days) {
-		this.days = days;
+	public Schedule(List<Week> weeks) {
+		this.weeks = weeks;
 	}
 	
-	public List<Day> getDays() {
-		return this.days;
+	public List<Week> getDays() {
+		return this.weeks;
 	}
 	
 	public String toString() {

@@ -7,28 +7,20 @@ public class Day {
 	
 	public static final int MINUTES_PER_DAY = 60 * 24;
 	
-	private List<Event> schedulables = new ArrayList<Event>();
+	private List<Block> blocks = new ArrayList<Block>();
 	
-	public boolean add(Event schedulable) {
-		for(Event s : this.schedulables) {
-			if(s.intersects(schedulable)) {
-				return false;
-			}
-		}
-		
-		return this.schedulables.add(schedulable);
+	public boolean add(Block block) {
+		block.setDay(this);
+		return this.blocks.add(block);
 	}
 	
-	public boolean remove(Event schedulable) {
-		return this.schedulables.remove(schedulable);
+	public boolean remove(Block block) {
+		block.setDay(null);
+		return this.blocks.remove(block);
 	}
 	
-	public boolean contains(Event schedulable) {
-		return this.schedulables.contains(schedulable);
-	}
-	
-	public List<Event> getSchedulables() {
-		return this.schedulables;
+	public boolean contains(Event block) {
+		return this.blocks.contains(block);
 	}
 	
 }

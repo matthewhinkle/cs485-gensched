@@ -3,9 +3,9 @@ package src.optimizer;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.schedule.Day;
 import src.schedule.Schedule;
 import src.schedule.ScheduleGenerator;
+import src.schedule.Week;
 
 
 public class EvolvableScheduleFactory extends EvolvableFactory<Schedule> {
@@ -14,16 +14,16 @@ public class EvolvableScheduleFactory extends EvolvableFactory<Schedule> {
 	
 	@Override
 	public Schedule createEvolvable() {
-		return this.generator.generate(this.makeDays());
+		return this.generator.generate(this.makeWeeks());
 	}
 	
-	private List<Day> makeDays() {
-		final List<Day> days = new ArrayList<Day>();
+	private List<Week> makeWeeks() {
+		final List<Week> weeks = new ArrayList<Week>();
 		for(int i = 0; i < 5; i++) {
-			days.add(new Day());
+			weeks.add(new Week());
 		}
 		
-		return days;
+		return weeks;
 	}
 
 }
