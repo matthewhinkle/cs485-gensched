@@ -22,9 +22,9 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 				
 				List<NFLEvent> events = day.getEvents();
 				for(NFLEvent event : events) {
-					if(event.getHome().equalsIgnoreCase("bye")
-					|| event.getAway().equalsIgnoreCase("bye")) {
-						value -= 1;
+					if(event.getHome().equalsIgnoreCase("BYE")
+					|| event.getAway().equalsIgnoreCase("BYE")) {
+						value += 1;
 					}
 				}
 			}
@@ -51,6 +51,9 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 				}
 			}
 		}
+		
+		value += 0 - this.getByeWeekValue(evolvable);
+		
 		return value;
 	}
 	
