@@ -7,20 +7,21 @@ public class Day {
 	
 	public static final int MINUTES_PER_DAY = 60 * 24;
 	
-	private List<Block> blocks = new ArrayList<Block>();
+	private List<NFLEvent> events = new ArrayList<NFLEvent>();
 	
-	public boolean add(Block block) {
-		block.setDay(this);
-		return this.blocks.add(block);
+	public boolean addEvent(NFLEvent e) {
+		return this.events.add(e);
 	}
 	
-	public boolean remove(Block block) {
-		block.setDay(null);
-		return this.blocks.remove(block);
+	public boolean removeEvent(NFLEvent block) {
+		return this.events.remove(block);
 	}
 	
-	public boolean contains(Event block) {
-		return this.blocks.contains(block);
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for(NFLEvent e : events) {
+			sb.append(e.toString() + "\n");
+		}
+		return sb.toString();
 	}
-	
 }

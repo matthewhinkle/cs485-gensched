@@ -25,14 +25,14 @@ public class Schedule implements Evolvable<Schedule> {
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		
-//		for(Day day : this.days) {
-//			sb.append(day.getSchedulables()).append("\n");
-//		}
-		
-		sb.append(h);
-		
+		for(Week w : weeks) {
+			sb.append(w.toString() + "\n");
+		}
 		return sb.toString();
+	}
+	
+	public void scheduleEvent(NFLEvent e, int week) {
+		weeks.get(week).getDay(0).addEvent(e);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class Schedule implements Evolvable<Schedule> {
 	public List<Schedule> mate(Iterable<Schedule> mates) {
 		List<Schedule> schedules = new ArrayList<Schedule>();
 		
-		schedules.add(new ScheduleGenerator().generate());
+		//schedules.add(new ScheduleGenerator().generate());
 		
 		return schedules;
 	}
