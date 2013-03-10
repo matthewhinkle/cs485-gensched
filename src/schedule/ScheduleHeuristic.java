@@ -54,7 +54,7 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 					weekValue += (1 - occurences(team, teams));
 				}
 			}
-			//System.out.println("Value for week: " + weekValue);
+			System.out.println("Value for week: " + weekValue);
 			value += weekValue;
 		}
 		
