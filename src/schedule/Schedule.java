@@ -8,7 +8,6 @@ import src.optimizer.Evolvable;
 
 
 public class Schedule implements Evolvable<Schedule> {
-	public int h = (new Random()).nextInt();
 	private List<Week> weeks;
 	
 	public Schedule() {
@@ -51,6 +50,18 @@ public class Schedule implements Evolvable<Schedule> {
 
 	@Override
 	public void mutate() {
-		// TODO Auto-generated method stub	
+		// Move a game from one week to another week randomly
+		Random random = new Random();
+		
+		// Get two random weeks
+		Week w1 = weeks.get(random.nextInt(weeks.size()));
+		Week w2 = weeks.get(random.nextInt(weeks.size()));
+		
+		// Get random event from week 1
+		Day day = w1.getDay(0);
+		NFLEvent e = day.getEvents().get(random.nextInt(day.getEvents().size()));
+		day.removeEvent(e);
+		
+		w2.getDay(0).addEvent(e);
 	}
 }

@@ -18,7 +18,7 @@ public class Day {
 	}
 	
 	public List<NFLEvent> getEvents() {
-		return events;
+		return this.events;
 	}
 	
 	public String toString() {
