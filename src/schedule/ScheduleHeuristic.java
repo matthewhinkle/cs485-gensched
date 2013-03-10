@@ -11,7 +11,22 @@ public class ScheduleHeuristic implements Heuristic<Schedule> {
 		
 		List<Week> weeks = evolvable.getWeeks();
 		for(int i = 0; i < weeks.size(); i++) {
+			if(i >= 4 && i <= 11) {
+				continue;
+			}
 			
+			Week w = weeks.get(i);
+			for(int j = 0; j < Week.DAYS_PER_WEEK; j++) {
+				Day day = w.getDay(j);
+				
+				List<NFLEvent> events = day.getEvents();
+				for(NFLEvent event : events) {
+					if(event.getHome().equalsIgnoreCase("bye")
+					|| event.getAway().equalsIgnoreCase("bye")) {
+						value -= 1;
+					}
+				}
+			}
 		}
 		
 		return value;
