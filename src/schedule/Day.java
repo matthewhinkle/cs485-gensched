@@ -39,4 +39,16 @@ public class Day {
 		}
 		return sb.toString();
 	}
+
+	public double eventSize() {
+		double value = 0;
+		for(NFLEvent e : events) {
+			if(e.getAway().equals("BYE") || e.getHome().equals("BYE")) {
+				value += 0.5;
+			} else {
+				value += 1.0;
+			}
+		}
+		return value;
+	}
 }

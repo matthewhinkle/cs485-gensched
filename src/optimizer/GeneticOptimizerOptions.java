@@ -50,4 +50,12 @@ public class GeneticOptimizerOptions {
 	public Integer getMaxHeuristic() {
 		return this.maxHeuristic;
 	}
+	
+	public String toString() {
+		String s = String.format("chanceToMutate: %s\npopulationSize: %s\niterations: %s\n",
+				chanceToMutate,
+				populationSize,
+				iterations);
+		return s;
+	}
 }

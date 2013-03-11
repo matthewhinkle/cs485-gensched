@@ -35,6 +35,7 @@ public class Schedule implements Evolvable<Schedule> {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for(Week w : weeks) {
+			sb.append(w.getDay(0).eventSize() + "\n");
 			sb.append(w.toString() + "\n");
 		}
 		return sb.toString();
@@ -80,12 +81,9 @@ public class Schedule implements Evolvable<Schedule> {
 		Random random = new Random();
 		for(int j = 0; j < 3; j++) {
 			Schedule child = new Schedule(this.weeks.size());
-			// For Event
-			int c = 0;
 			for(Entry<NFLEvent, List<Integer>> entry : eventWeeks.entrySet()) {
 				int r = random.nextInt(entry.getValue().size());
 				child.getWeeks().get(entry.getValue().get(r)).getDay(0).addEvent(entry.getKey());
-				c++;
 			}
 			schedules.add(child);
 		}
@@ -96,21 +94,40 @@ public class Schedule implements Evolvable<Schedule> {
 	public void mutate() {
 		// Move a game from one week to another week randomly
 		Random random = new Random();
-		
-		// Get two random weeks
-		Week w1 = weeks.get(random.nextInt(weeks.size()));
-		Week w2 = weeks.get(random.nextInt(weeks.size()));
-		int old = w1.getDay(0).getEvents().size() + w2.getDay(0).getEvents().size();
-		
-		// Get random event from week 1
-		Day day = w1.getDay(0);
-		if(day.getEvents().size() != 0) {
-			NFLEvent e = day.getEvents().get(random.nextInt(day.getEvents().size()));
-			day.removeEvent(e);
-			w2.getDay(0).addEvent(e);
-		}
+		double r = random.nextDouble(); 
+		if(r < 0.75) {
+			// Get two random weeks
+			Week w1 = weeks.get(random.nextInt(weeks.size()));
+			Week w2 = weeks.get(random.nextInt(weeks.size()));
 			
-		int n = w1.getDay(0).getEvents().size() + w2.getDay(0).getEvents().size();
-		assert(old == n);
+			// Get random event from week 1
+			Day day = w1.getDay(0);
+			if(day.getEvents().size() != 0) {
+				NFLEvent e = day.getEvents().get(random.nextInt(day.getEvents().size()));
+				day.removeEvent(e);
+				w2.getDay(0).addEvent(e);
+			}
+		} else {
+			Week smallest = null;
+			Week largest  = null;
+			
+			for(Week w : weeks) {
+				if(smallest == null || w.getDay(0).eventSize() < smallest.getDay(0).eventSize()) {
+					smallest = w;
+				}
+				
+				if(largest == null || w.getDay(0).eventSize() > largest.getDay(0).eventSize()) {
+					largest = w;
+				}
+			}
+			
+			if(!(smallest.getDay(0).eventSize() == largest.getDay(0).eventSize())) {
+				Day day = largest.getDay(0);
+				NFLEvent e = null;
+				while((e = day.getEvents().get(random.nextInt(day.getEvents().size()))).getAway().equals("BYE")) {}
+				day.removeEvent(e);
+				smallest.getDay(0).addEvent(e);
+			}
+		}
 	}
 }
